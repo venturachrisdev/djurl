@@ -1,9 +1,9 @@
 DjUrl - Django urls
-====
+===
 Make Django routes easy again.
 
 Why should I use DjUrl?
-=======
+---
 Django routing urls aren't easy to deal with, regular expressions can become a nightmare sometimes. Just imagine dealing with such routes in your `django app`:
 ```python
 from django.conf.urls import url
@@ -36,7 +36,7 @@ urlpatterns = [
 No regex, just clean paths and param names. You can now pass the regex work to DjUrl and concentrate in the *bussiness logic*. It saves you a lot of time and code. *You don't need to worry about the routes anymore*. **Note you don't need to call `as_view` in your CBV's.** DjUrl does this for you as well.
 
 Usage
-=======
+---
 Now you know what you should use `DjUrl`, It's time to learn how to use it. DjUrl has a list of known/default pattern that you can use in your routes, these are:
 
 * `id`: A secuence of characters from 0 to 9. Ej: `1, 12, 454545, 8885500, 8`
@@ -75,7 +75,7 @@ url('/:hash', myview)
 ```
 
 Install
-=======
+---
 If you want to have fun with this library and integrate it to your project, just type in your terminal:
 ```
 $ pip install djurl
@@ -87,7 +87,7 @@ $ python setup.py install
 Enjoy it!
 
 Contributions
-=====
+---
 If you've found a bug/error or just have questions, feel free to open an **issue**. And, **Pull requests** are welcome as well.
 
 License

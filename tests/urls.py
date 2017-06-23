@@ -25,7 +25,7 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertEqual(build('^me/15/$'), '^me/15/$')
 		self.assertEqual(build('^father/', exact=False), '^father/')
 		self.assertEqual(build('comments/:comment'), '^comments/:comment/$')
-		#elf.assertEqual(build('/', exact=False), '^/')
+		self.assertEqual(build('/', exact=False), '^')
 		self.assertEqual(build('^*.jpg|png|gif|jpeg$'), '^*.jpg|png|gif|jpeg$')
 		self.assertEqual(build('^/', exact=False), '^/')
 
@@ -53,7 +53,7 @@ class TestRegexBuilding(unittest.TestCase):
 
 	def test_normalize_url(self):
 		self.assertEqual(build(''), '^$')
-		#self.assertEqual(build('/'), '^$')
+		self.assertEqual(build('/'), '^$')
 		self.assertEqual(build('hello/world'), '^hello/world/$')
 		self.assertEqual(build('/hello/world'),'^hello/world/$')
 		self.assertEqual(build('/hello/world', exact=False), '^hello/world')

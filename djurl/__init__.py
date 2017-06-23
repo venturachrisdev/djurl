@@ -31,7 +31,7 @@ class Djurl():
 	def __init__(self, pattern, exact=True):
 		self.pattern = pattern
 		self.exact = exact
-		if self.pattern.startswith('/') and len(self.pattern) > 1:
+		if self.pattern.startswith('/'):
 			self.pattern = self.pattern[1:]
 
 	def normalize(self, path):

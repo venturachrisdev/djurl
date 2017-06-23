@@ -1,7 +1,0 @@
-setup.py
-djurl/__init__.py
-djurl.egg-info/PKG-INFO
-djurl.egg-info/SOURCES.txt
-djurl.egg-info/dependency_links.txt
-djurl.egg-info/requires.txt
-djurl.egg-info/top_level.txt

@@ -31,16 +31,19 @@ class Djurl():
 	def __init__(self, pattern, exact=True):
 		self.pattern = pattern
 		self.exact = exact
-		if self.pattern.startswith('/'):
+		if self.pattern.startswith('/') and len(self.pattern) > 1:
 			self.pattern = self.pattern[1:]
 
 	def normalize(self, path):
+		stpath = path.lstrip("^\n")
+		stpath = stpath.rstrip("$\n")
+		stpath	= stpath.replace(" ", "")
 		result = "^%s"
 		if self.exact:
 			result += "$"
 
 		# Trim
-		return result % path.lstrip("^ \n").rstrip("$ \n")
+		return result % stpath
 
 	def create_pattern(self, key, pattern):
 		return "(?P<%s>%s)" % (key, pattern)
@@ -62,7 +65,7 @@ class Djurl():
 						if key.endswith('_%s' % x):
 							newpattern = self.create_pattern(key, _default_patterns_[x])
 							built = built.replace(":%s" % key, newpattern)
-			if not built.endswith('/'):
+			if not built.endswith('/') and not built.endswith('$') and self.exact:
 				built += '/'
 
 		result = self.normalize(built)

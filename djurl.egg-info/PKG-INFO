@@ -1,0 +1,29 @@
+Metadata-Version: 1.1
+Name: djurl
+Version: 0.1.0
+Summary: Url prettyfier for django
+Home-page: http://github.com/venturachrisdev/djurl
+Author: Christopher Ventura
+Author-email: venturachrisdev@gmail.com
+License: MIT
+Description: DjUrl
+        ====
+        Url prettyfier for django
+Keywords: django url urlparse web python regex
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console
+Classifier: Environment :: Plugins
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: Software Development :: Pre-processors

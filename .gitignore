@@ -1,2 +1,7 @@
-__pycache__
+__pycache__/
 *.log
+*.egg-info/
+build/
+dist/
+.idea/
+.pypirc

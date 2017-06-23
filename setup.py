@@ -10,7 +10,7 @@ setup(
 	author="Christopher Ventura",
 	author_email="venturachrisdev@gmail.com",
 	description="Url prettyfier for django",
-	url="http://github.com/venturachrisdev/djurl",
+	url="https://github.com/venturachrisdev/djurl",
 	license="MIT",
 	keywords="django url urlparse web python regex",
 	packages= find_packages(exclude=['tests']),

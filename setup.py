@@ -14,7 +14,7 @@ setup(
 	license="MIT",
 	keywords="django url urlparse web python regex",
 	packages= find_packages(exclude=['tests']),
-	include_packages_data=True,
+	include_package_data=True,
 	test_suite="tests",
 	long_description= read('README.md'),
 	install_requires=['django'],

@@ -64,34 +64,34 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertEqual(build('  news/today  '), build('news/today'))
 
 	def test_pattern_pk(self):
-		self.assertEqual(build('/:pk'), '^(?P<pk>[0-9]+)/$')
-		self.assertEqual(build('/articles/:pk'), '^articles/(?P<pk>[0-9]+)/$')
-		self.assertEqual(build('/articles/:pk/comments'), '^articles/(?P<pk>[0-9]+)/comments/$')
+		self.assertEqual(build('/:pk'), '^(?P<pk>\d+)/$')
+		self.assertEqual(build('/articles/:pk'), '^articles/(?P<pk>\d+)/$')
+		self.assertEqual(build('/articles/:pk/comments'), '^articles/(?P<pk>\d+)/comments/$')
 
 	def test_custom_patten_pk(self):
-		self.assertEqual(build('/:user_pk'), '^(?P<user_pk>[0-9]+)/$')
-		self.assertEqual(build('/articles/:article_pk'), '^articles/(?P<article_pk>[0-9]+)/$')
-		self.assertEqual(build('/articles/:article_pk/comments'), '^articles/(?P<article_pk>[0-9]+)/comments/$')
+		self.assertEqual(build('/:user_pk'), '^(?P<user_pk>\d+)/$')
+		self.assertEqual(build('/articles/:article_pk'), '^articles/(?P<article_pk>\d+)/$')
+		self.assertEqual(build('/articles/:article_pk/comments'), '^articles/(?P<article_pk>\d+)/comments/$')
 
 	def test_pattern_id(self):
-		self.assertEqual(build('/:id'), '^(?P<id>[0-9]+)/$')
-		self.assertEqual(build('/user/:id'), '^user/(?P<id>[0-9]+)/$')
-		self.assertEqual(build('/user/:id/friends'), '^user/(?P<id>[0-9]+)/friends/$')
+		self.assertEqual(build('/:id'), '^(?P<id>\d+)/$')
+		self.assertEqual(build('/user/:id'), '^user/(?P<id>\d+)/$')
+		self.assertEqual(build('/user/:id/friends'), '^user/(?P<id>\d+)/friends/$')
 
 	def test_custom_pattern_id(self):
-		self.assertEqual(build('/:user_id'), '^(?P<user_id>[0-9]+)/$')
-		self.assertEqual(build('/user/:user_id'), '^user/(?P<user_id>[0-9]+)/$')
-		self.assertEqual(build('/user/:user_id/friends'), '^user/(?P<user_id>[0-9]+)/friends/$')
+		self.assertEqual(build('/:user_id'), '^(?P<user_id>\d+)/$')
+		self.assertEqual(build('/user/:user_id'), '^user/(?P<user_id>\d+)/$')
+		self.assertEqual(build('/user/:user_id/friends'), '^user/(?P<user_id>\d+)/friends/$')
 
 	def test_pattern_slug(self):
-		self.assertEqual(build('/:slug'), '^(?P<slug>[A-Za-z0-9_-]+)/$')
-		self.assertEqual(build('/articles/:slug'), '^articles/(?P<slug>[A-Za-z0-9_-]+)/$')
-		self.assertEqual(build('/post/:slug/comments'), '^post/(?P<slug>[A-Za-z0-9_-]+)/comments/$')
+		self.assertEqual(build('/:slug'), '^(?P<slug>\w+)/$')
+		self.assertEqual(build('/articles/:slug'), '^articles/(?P<slug>\w+)/$')
+		self.assertEqual(build('/post/:slug/comments'), '^post/(?P<slug>\w+)/comments/$')
 
 	def test_custom_pattern_slug(self):
-		self.assertEqual(build('/:post_slug'), '^(?P<post_slug>[A-Za-z0-9_-]+)/$')
-		self.assertEqual(build('/articles/:article_slug'), '^articles/(?P<article_slug>[A-Za-z0-9_-]+)/$')
-		self.assertEqual(build('/post/:post_slug/comments'), '^post/(?P<post_slug>[A-Za-z0-9_-]+)/comments/$')
+		self.assertEqual(build('/:post_slug'), '^(?P<post_slug>\w+)/$')
+		self.assertEqual(build('/articles/:article_slug'), '^articles/(?P<article_slug>\w+)/$')
+		self.assertEqual(build('/post/:post_slug/comments'), '^post/(?P<post_slug>\w+)/comments/$')
 
 	def test_pattern_page(self):
 		self.assertEqual(build('/:page'),'^(?P<page>\d+)/$')
@@ -102,10 +102,10 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertEqual(build('/articles/:article_page'),'^articles/(?P<article_page>\d+)/$')
 
 	def test_combined_patterns_in_same_route(self):
-		self.assertEqual(build('/articles/:slug/comments/:id'), '^articles/(?P<slug>[A-Za-z0-9_-]+)/comments/(?P<id>[0-9]+)/$')
-		self.assertEqual(build('/articles/:article_id/comments/:comment_id'), '^articles/(?P<article_id>[0-9]+)/comments/(?P<comment_id>[0-9]+)/$')
-		self.assertEqual(build('/user/:user_pk/status/:status_id'), '^user/(?P<user_pk>[0-9]+)/status/(?P<status_id>[0-9]+)/$')
-		self.assertEqual(build('/item/:pk/color/:slug'), '^item/(?P<pk>[0-9]+)/color/(?P<slug>[A-Za-z0-9_-]+)/$')
+		self.assertEqual(build('/articles/:slug/comments/:id'), '^articles/(?P<slug>\w+)/comments/(?P<id>\d+)/$')
+		self.assertEqual(build('/articles/:article_id/comments/:comment_id'), '^articles/(?P<article_id>\d+)/comments/(?P<comment_id>\d+)/$')
+		self.assertEqual(build('/user/:user_pk/status/:status_id'), '^user/(?P<user_pk>\d+)/status/(?P<status_id>\d+)/$')
+		self.assertEqual(build('/item/:pk/color/:slug'), '^item/(?P<pk>\d+)/color/(?P<slug>\w+)/$')
 
 	def test_pattern_day(self):
 		pass

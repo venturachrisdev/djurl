@@ -1,3 +1,7 @@
+v0.2.0 (Develop)
+---
+* Added `:filename` regex.
+
 v0.1.2
 ---
 * Fixed bug when `route == '^$'` or `route == '/'`

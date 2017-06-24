@@ -113,6 +113,10 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertEqual(build('/articles/:article_slug'), '^articles/(?P<article_slug>[A-Za-z0-9_-]+)/$')
 		self.assertEqual(build('/post/:post_slug/comments'), '^post/(?P<post_slug>[A-Za-z0-9_-]+)/comments/$')
 
+	def test_pattern_filename(self):
+		self.assertEqual(build('/:filename'), '^(?P<filename>[\w,\s-]+\.[A-Za-z]{2,4})/$')
+		self.assertEqual(build('/media/:filename'), '^media/(?P<filename>[\w,\s-]+\.[A-Za-z]{2,4})/$')
+
 	def test_pattern_page(self):
 		self.assertEqual(build('/:page'),'^(?P<page>\d+)/$')
 		self.assertEqual(build('/articles/:page'),'^articles/(?P<page>\d+)/$')
@@ -228,4 +232,21 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertFalse(evaluate('/date/:date', 'date/2017-10-32'))
 		self.assertFalse(evaluate('/date/:date', 'date/2017-15-3'))
 		self.assertFalse(evaluate('/date/:date', 'date/20114-11-11'))
+
+	def test_evaluate_filename(self):
+		self.assertTrue(evaluate('/:filename', 'README.md'))
+		self.assertTrue(evaluate('/:filename', 'license.txt'))
+		self.assertTrue(evaluate('/:filename', 'my_first_book.pdf'))
+		self.assertTrue(evaluate('/:filename', 'Main.java'))
+		self.assertTrue(evaluate('/:filename', 'OldSchool.cpp'))
+		self.assertTrue(evaluate('/:filename', '__init__.py'))
+		self.assertTrue(evaluate('/:filename', 'style.css'))
+		self.assertTrue(evaluate('/:filename', 'index.html'))
+		self.assertTrue(evaluate('/:filename', 'h9g8984_3_g64_h00.tmp'))
+
+		self.assertFalse(evaluate('/:filename', '.gitignore'))
+		self.assertFalse(evaluate('/:filename', 'h9g8984_3_g64_h00'))
+		self.assertFalse(evaluate('/:filename', 'home'))
+		self.assertFalse(evaluate('/:filename', 'user/articles'))
+		self.assertFalse(evaluate('/:filename', 'chapter/01'))
 

@@ -7,6 +7,18 @@ if sys.version_info >= (2,7):
 else:
 	from django.utils import unittest
 
+if sys.version_info > (3,4):
+	from re import fullmatch
+else:
+	import re
+	"""
+	Emulate python-3.4 re.fullmatch().
+
+	https://stackoverflow.com/questions/30212413/backport-python-3-4s-regular-expression-fullmatch-to-python-2
+	"""
+	def fullmatch(pattern, string):
+		return re.match("(?:%s)\Z" % pattern, string)
+
 from djurl import register_pattern, Djurl
 
 def build(pattern, exact=True):
@@ -18,7 +30,6 @@ def evaluate(pattern, path, exact=True):
 	if exact and len(path) > 1:
 		path = path + '/'
 
-	from re import fullmatch
 	return fullmatch(p, path)
 
 class TestRegexBuilding(unittest.TestCase):

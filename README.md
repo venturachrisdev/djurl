@@ -87,9 +87,17 @@ $ python setup.py install
 ```
 Enjoy it!
 
+Testing
+---
+Clone the repo and run Djurl tests by:
+```
+$ python setup.py test
+```
+
 Contributions
 ---
 If you've found a bug/error or just have questions, feel free to open an **issue**. And, **Pull requests** are welcome as well.
+Don't forget to add your name to [CONTRIBUTORS.md](CONTRIBUTORS.md)
 
 License
 =======

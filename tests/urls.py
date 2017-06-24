@@ -93,14 +93,14 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertEqual(build('/user/:user_id/friends'), '^user/(?P<user_id>\d+)/friends/$')
 
 	def test_pattern_slug(self):
-		self.assertEqual(build('/:slug'), '^(?P<slug>\w+)/$')
-		self.assertEqual(build('/articles/:slug'), '^articles/(?P<slug>\w+)/$')
-		self.assertEqual(build('/post/:slug/comments'), '^post/(?P<slug>\w+)/comments/$')
+		self.assertEqual(build('/:slug'), '^(?P<slug>[A-Za-z0-9_-]+)/$')
+		self.assertEqual(build('/articles/:slug'), '^articles/(?P<slug>[A-Za-z0-9_-]+)/$')
+		self.assertEqual(build('/post/:slug/comments'), '^post/(?P<slug>[A-Za-z0-9_-]+)/comments/$')
 
 	def test_custom_pattern_slug(self):
-		self.assertEqual(build('/:post_slug'), '^(?P<post_slug>\w+)/$')
-		self.assertEqual(build('/articles/:article_slug'), '^articles/(?P<article_slug>\w+)/$')
-		self.assertEqual(build('/post/:post_slug/comments'), '^post/(?P<post_slug>\w+)/comments/$')
+		self.assertEqual(build('/:post_slug'), '^(?P<post_slug>[A-Za-z0-9_-]+)/$')
+		self.assertEqual(build('/articles/:article_slug'), '^articles/(?P<article_slug>[A-Za-z0-9_-]+)/$')
+		self.assertEqual(build('/post/:post_slug/comments'), '^post/(?P<post_slug>[A-Za-z0-9_-]+)/comments/$')
 
 	def test_pattern_page(self):
 		self.assertEqual(build('/:page'),'^(?P<page>\d+)/$')
@@ -111,10 +111,10 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertEqual(build('/articles/:article_page'),'^articles/(?P<article_page>\d+)/$')
 
 	def test_combined_patterns_in_same_route(self):
-		self.assertEqual(build('/articles/:slug/comments/:id'), '^articles/(?P<slug>\w+)/comments/(?P<id>\d+)/$')
+		self.assertEqual(build('/articles/:slug/comments/:id'), '^articles/(?P<slug>[A-Za-z0-9_-]+)/comments/(?P<id>\d+)/$')
 		self.assertEqual(build('/articles/:article_id/comments/:comment_id'), '^articles/(?P<article_id>\d+)/comments/(?P<comment_id>\d+)/$')
 		self.assertEqual(build('/user/:user_pk/status/:status_id'), '^user/(?P<user_pk>\d+)/status/(?P<status_id>\d+)/$')
-		self.assertEqual(build('/item/:pk/color/:slug'), '^item/(?P<pk>\d+)/color/(?P<slug>\w+)/$')
+		self.assertEqual(build('/item/:pk/color/:slug'), '^item/(?P<pk>\d+)/color/(?P<slug>[A-Za-z0-9_-]+)/$')
 
 	def test_pattern_day(self):
 		self.assertEqual(build('/day/:day'), '^day/(?P<day>(([0-2])?([1-9])|[1-3]0|31))/$')
@@ -140,7 +140,31 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertTrue(evaluate('/hello', 'hello'))
 		self.assertTrue(evaluate('/home/', 'home'))
 		self.assertTrue(evaluate('/article/:article', 'article/:article'))
+		self.assertTrue(evaluate('  /users/  ', 'users'))
 
 		self.assertFalse(evaluate('/blog','blogggg'))
+		self.assertFalse(evaluate('/article/:article', 'article/3'))
+		self.assertFalse(evaluate('/blog/:blog', 'blog/hello-world'))
 
-		self.assertTrue(evaluate('  /users/  ', 'users'))
+	def test_evaluate_pk(self):
+		self.assertTrue(evaluate('/:pk', '10'))
+		self.assertTrue(evaluate('/post/:pk', 'post/4'))
+		self.assertTrue(evaluate('/post/:pk', 'post/2345454'))
+
+		self.assertFalse(evaluate('/post/:pk', 'post/hello-universe'))
+
+	def test_evaluate_id(self):
+		self.assertTrue(evaluate('/:id', '19090'))
+		self.assertTrue(evaluate('/user/:id', 'user/3'))
+		self.assertTrue(evaluate('/user/:id', 'user/53723'))
+
+		self.assertFalse(evaluate('/user/:id', 'user/2017-10-20'))
+		self.assertFalse(evaluate('/user/:id', 'post/96jhn869y6j'))
+
+	def test_evaluate_slug(self):
+		self.assertTrue(evaluate('/:slug', 'hello-world3'))
+		self.assertTrue(evaluate('/article/:slug', 'article/sherlock-holmes-season-2-episode-3-review'))
+		self.assertTrue(evaluate('/article/:slug', 'article/58jtgj689hy'))
+
+		self.assertFalse(evaluate('/item/:slug', 'item/2%20p40501rg%207#ktgi-10-20'))
+

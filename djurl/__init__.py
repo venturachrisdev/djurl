@@ -8,7 +8,7 @@ _default_patterns_ = {
 	# Keys
 	'pk': 		r'\d+',
 	'id': 		r'\d+',
-	'slug': 	r'\w+',
+	'slug': 	r'[A-Za-z0-9_-]+',
 	# Date
 	'day': 		r'(([0-2])?([1-9])|[1-3]0|31)',
 	'month': 	r'(0?[1-9]|10|11|12)',

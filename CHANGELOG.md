@@ -1,4 +1,4 @@
-v0.1.2 (Develop)
+v0.1.2
 ---
 * Fixed bug when `route == '^$'` or `route == '/'`
 * Removed adding `/` at the end of the route if it's not an exact route.

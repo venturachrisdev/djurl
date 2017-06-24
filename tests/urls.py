@@ -7,7 +7,7 @@ if sys.version_info >= (2,7):
 else:
 	from django.utils import unittest
 
-if sys.version_info > (3,4):
+if sys.version_info >= (3,4):
 	from re import fullmatch
 else:
 	import re

@@ -17,7 +17,8 @@ urlpatterns = [
 	# => /blog/search/sometitle
 	url(r'^blog/search/(?P<search_query>[A-Za-z0-9_-]+)/$', SearchResultsView.as_view(), name="search"),
 	# => /blog/archive/2017/02/12
-	url(r'^blog/archive/(?P<date>[0-9]{4}-(0?([1-9])|10|11|12)-((0|1|2)?([1-9])|[1-3]0|31))/$', ArchiveView.as_view(), name="archive")
+	url(r'^blog/archive/(?P<date>[0-9]{4}-(0?([1-9])|10|11|12)-((0|1|2)?([1-9])|[1-3]0|31))/$',
+		ArchiveView.as_view(), name="archive")
 ]
 ```
 That's too much work and you lost me in those regex. With **DjUrl** this comes easy, you just need to *express what you want*, **DjUrl will handle the regular expressions for you**:

@@ -1,4 +1,4 @@
-DjUrl - Django urls
+DjUrl - Django urls [![Build Status](https://travis-ci.org/venturachrisdev/djurl.svg?branch=master)](https://travis-ci.org/venturachrisdev/djurl)
 ===
 Make Django routes easy again.
 

@@ -35,8 +35,9 @@ class Djurl():
 
 	def normalize(self, path):
 		stpath = path.lstrip("^\n")
-		stpath = stpath.rstrip("$\n")
-		stpath	= stpath.replace(" ", "")
+		if len(stpath) > 1:
+			stpath = stpath.lstrip("//");
+		stpath = stpath.rstrip(" $\n")
 		result = "^%s"
 		if self.exact:
 			result += "$"
@@ -44,13 +45,16 @@ class Djurl():
 		# Trim
 		return result % stpath
 
+	def trim(self, path):
+		return path.replace(" ", "")
+
 	def create_pattern(self, key, pattern):
 		return "(?P<%s>%s)" % (key, pattern)
 
 	#core
 	def build(self):
 
-		built = self.pattern
+		built = self.trim(self.pattern)
 		if len(built) > 1:
 			import re
 			paramkeys = re.findall('(:([a-z_\d]+))', built)

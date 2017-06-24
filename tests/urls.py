@@ -12,6 +12,15 @@ from djurl import register_pattern, Djurl
 def build(pattern, exact=True):
 		return Djurl(pattern, exact=exact).build()
 
+def evaluate(pattern, path, exact=True):
+	# Return True if the path matches with the given pattern, False otherwise
+	p = build(pattern, exact=exact)
+	if exact and len(path) > 1:
+		path = path + '/'
+
+	from re import fullmatch
+	return fullmatch(p, path)
+
 class TestRegexBuilding(unittest.TestCase):
 
 	def test_building_without_pattern(self):
@@ -108,13 +117,30 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertEqual(build('/item/:pk/color/:slug'), '^item/(?P<pk>\d+)/color/(?P<slug>\w+)/$')
 
 	def test_pattern_day(self):
-		pass
+		self.assertEqual(build('/day/:day'), '^day/(?P<day>(([0-2])?([1-9])|[1-3]0|31))/$')
+		self.assertEqual(build('/report/:id/day/:day'), '^report/(?P<id>\d+)/day/(?P<day>(([0-2])?([1-9])|[1-3]0|31))/$')
 
 	def test_pattern_month(self):
-		pass
+		self.assertEqual(build('/month/:month'), '^month/(?P<month>(0?[1-9]|10|11|12))/$')
+		self.assertEqual(build('/report/:id/month/:month/day/:day'), '^report/(?P<id>\d+)/month/(?P<month>(0?[1-9]|10|11|12))/day/(?P<day>(([0-2])?([1-9])|[1-3]0|31))/$')
 
 	def test_pattern_year(self):
-		pass
+		self.assertEqual(build('/archive/year/:year'), '^archive/year/(?P<year>\w{4})/$')
+		self.assertEqual(build('/report/:id/date/:year/:month/:day'), '^report/(?P<id>\d+)/date/(?P<year>\w{4})/(?P<month>(0?[1-9]|10|11|12))/(?P<day>(([0-2])?([1-9])|[1-3]0|31))/$')
 
 	def test_pattern_date(self):
-		pass
+		self.assertEqual(build('/archive/date/:date'), '^archive/date/(?P<date>\w{4}-(0?([1-9])|10|11|12)-((0|1|2)?([1-9])|[1-3]0|31))/$')
+
+	"""
+	Evaluation Tests
+	"""
+
+	def test_evaluate_basic(self):
+		self.assertTrue(evaluate('/', ''))
+		self.assertTrue(evaluate('/hello', 'hello'))
+		self.assertTrue(evaluate('/home/', 'home'))
+		self.assertTrue(evaluate('/article/:article', 'article/:article'))
+
+		self.assertFalse(evaluate('/blog','blogggg'))
+
+		self.assertTrue(evaluate('  /users/  ', 'users'))

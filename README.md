@@ -1,4 +1,4 @@
-DjUrl - Django urls [![Build Status](https://travis-ci.org/venturachrisdev/djurl.svg?branch=master)](https://travis-ci.org/venturachrisdev/djurl)
+![DjUrl - Django urls](/djurlheader.png) [![Build Status](https://travis-ci.org/venturachrisdev/djurl.svg?branch=master)](https://travis-ci.org/venturachrisdev/djurl)
 ===
 Define your django urls as simple as possible.
 

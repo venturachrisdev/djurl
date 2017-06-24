@@ -162,9 +162,59 @@ class TestRegexBuilding(unittest.TestCase):
 		self.assertFalse(evaluate('/user/:id', 'post/96jhn869y6j'))
 
 	def test_evaluate_slug(self):
-		self.assertTrue(evaluate('/:slug', 'hello-world3'))
+		self.assertTrue(evaluate('/:slug', 'hello-world_3'))
 		self.assertTrue(evaluate('/article/:slug', 'article/sherlock-holmes-season-2-episode-3-review'))
 		self.assertTrue(evaluate('/article/:slug', 'article/58jtgj689hy'))
 
 		self.assertFalse(evaluate('/item/:slug', 'item/2%20p40501rg%207#ktgi-10-20'))
+
+	def test_evaluate_page(self):
+		self.assertTrue(evaluate('/:page', '10'))
+		self.assertTrue(evaluate('/magazine/page/:page', 'magazine/page/4'))
+		self.assertTrue(evaluate('/magazine/page/:page', 'magazine/page/23'))
+
+		self.assertFalse(evaluate('/magazine/:page', 'magazine/under-the-red_hood'))
+
+	def test_evaluate_date(self):
+		self.assertTrue(evaluate('/day/:day', 'day/02'))
+		self.assertTrue(evaluate('/day/:day', 'day/2'))
+		self.assertTrue(evaluate('/day/:day', 'day/31'))
+
+		self.assertFalse(evaluate('/day/:day', 'day/32'))
+
+		self.assertTrue(evaluate('/month/:month', 'month/01'))
+		self.assertTrue(evaluate('/month/:month', 'month/2'))
+		self.assertTrue(evaluate('/month/:month', 'month/12'))
+
+		self.assertFalse(evaluate('/month/:month', 'month/13'))
+
+
+		self.assertTrue(evaluate('/year/:year', 'year/1492'))
+		self.assertTrue(evaluate('/year/:year', 'year/2016'))
+		self.assertTrue(evaluate('/year/:year', 'year/4096'))
+
+		self.assertFalse(evaluate('/year/:year', 'year/56000'))
+
+		self.assertTrue(evaluate('/date/:day/:month/:year', 'date/31/10/2017'))
+		self.assertTrue(evaluate('/date/:day/:month/:year', 'date/09/1/2017'))
+		self.assertTrue(evaluate('/date/:day/:month/:year', 'date/3/01/2017'))
+		self.assertTrue(evaluate('/date/:day/:month/:year', 'date/11/11/2011'))
+
+		self.assertFalse(evaluate('/date/:day/:month/:year', 'date/32/10/2017'))
+		self.assertFalse(evaluate('/date/:day/:month/:year', 'date/3/15/2017'))
+		self.assertFalse(evaluate('/date/:day/:month/:year', 'date/11/11/20114'))
+
+
+		self.assertTrue(evaluate('/date/:date', 'date/2017-10-31'))
+		self.assertTrue(evaluate('/date/:date', 'date/2017-09-1'))
+		self.assertTrue(evaluate('/date/:date', 'date/2017-01-3'))
+		self.assertTrue(evaluate('/date/:date', 'date/2011-11-11'))
+
+
+		self.assertFalse(evaluate('/date/:date', 'date/2011-11/11'))
+		self.assertFalse(evaluate('/date/:date', 'date/2011_11_11'))
+		self.assertFalse(evaluate('/date/:date', 'date/2011/11-11'))
+		self.assertFalse(evaluate('/date/:date', 'date/2017-10-32'))
+		self.assertFalse(evaluate('/date/:date', 'date/2017-15-3'))
+		self.assertFalse(evaluate('/date/:date', 'date/20114-11-11'))
 

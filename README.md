@@ -75,6 +75,8 @@ register_pattern('hash', '[a-f0-9]{9}')
 url('/:hash', myview)
 ```
 
+If you have questions, visit our [FAQ's](FAQ.md) or open an *issue*.
+
 Install
 ---
 If you want to have fun with this library and integrate it to your project, just type in your terminal:

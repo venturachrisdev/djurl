@@ -1,3 +1,7 @@
+v0.1.3
+---
+* Fixed fatal bug when using nested routes.
+
 v0.1.2
 ---
 * Fixed bug when `route == '^$'` or `route == '/'`

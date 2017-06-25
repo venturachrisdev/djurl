@@ -9,7 +9,7 @@ setup(
 	version=__import__('djurl').get_version(),
 	author="Christopher Ventura",
 	author_email="venturachrisdev@gmail.com",
-	description="Define your django urls as simple as possible.",
+	description="Simple yet helpful library for writing Django urls by an easy, short an intuitive way.",
 	url="https://github.com/venturachrisdev/djurl",
 	license="MIT",
 	keywords="django url urlparse web python regex",

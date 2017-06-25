@@ -1,6 +1,6 @@
 ![DjUrl - Django urls](/djurlheader.png) [![Build Status](https://travis-ci.org/venturachrisdev/djurl.svg?branch=master)](https://travis-ci.org/venturachrisdev/djurl)
 ===
-Define your django urls as simple as possible.
+Simple yet helpful library for writing Django urls by an easy, short an intuitive way.
 
 Why should I use DjUrl?
 ---

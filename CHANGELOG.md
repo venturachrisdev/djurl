@@ -1,3 +1,8 @@
+v0.2.0 (Develop)
+---
+* Added `:filename` regex.
+* removed unnecesary `print()` statement.
+
 v0.1.3
 ---
 * Fixed fatal bug when using nested routes.

@@ -1,5 +1,5 @@
 
-VERSION = (0,1,3)
+VERSION = (0,1,2)
 
 def get_version():
 	return ".".join(map(str, VERSION))
@@ -28,9 +28,8 @@ Long description:
 
 """
 class Djurl():
-	def __init__(self, pattern, exact=True, father=False):
+	def __init__(self, pattern, exact=True):
 		self.pattern = pattern
-		self.father = father
 		self.exact = exact
 		if self.pattern.startswith('/'):
 			self.pattern = self.pattern[1:]
@@ -64,14 +63,15 @@ class Djurl():
 				if key in _default_patterns_:
 					newpattern = self.create_pattern(key, _default_patterns_[key])
 					built = built.replace(":%s" % key, newpattern)
+					print(built)
 				else:
 					for x in _default_patterns_:
 						if key.endswith('_%s' % x):
 							newpattern = self.create_pattern(key, _default_patterns_[x])
 							built = built.replace(":%s" % key, newpattern)
 			if not built.endswith('/') and not built.endswith('$'):
-				if self.exact or (not self.exact and self.father):
-					built += '/'
+				built += '/'
+
 		result = self.normalize(built)
 		return result
 
@@ -95,7 +95,6 @@ def register_pattern(key, pattern):
 
 def url(pattern, view, kwargs=None, name=None):
 	exact = True
-	father = False
 	v = view
 
 	# Class Based Views
@@ -106,7 +105,6 @@ def url(pattern, view, kwargs=None, name=None):
 	# include
 	if isinstance(v, tuple):
 		exact = False
-		father = True
 
 	from django.conf.urls import url as BaseUrl
-	return BaseUrl(Djurl(pattern, exact=exact, father=father), v, kwargs=kwargs, name=name)
+	return BaseUrl(Djurl(pattern, exact=exact), v, kwargs=kwargs, name=name)

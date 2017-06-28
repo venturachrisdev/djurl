@@ -64,7 +64,6 @@ class Djurl():
 				if key in _default_patterns_:
 					newpattern = self.create_pattern(key, _default_patterns_[key])
 					built = built.replace(":%s" % key, newpattern)
-					print(built)
 				else:
 					for x in _default_patterns_:
 						if key.endswith('_%s' % x):

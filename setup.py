@@ -1,25 +1,27 @@
 from setuptools import setup, find_packages
 
+
 def read(filename):
-	import os
-	return open(os.path.join(os.path.dirname(__file__), filename)).read()
+    import os
+    return open(os.path.join(os.path.dirname(__file__), filename)).read()
+
 
 setup(
-	name="djurl",
-	version=__import__('djurl').get_version(),
-	author="Christopher Ventura",
-	author_email="venturachrisdev@gmail.com",
-	description="Simple yet helpful library for writing Django urls by an easy, short an intuitive way.",
-	url="https://github.com/venturachrisdev/djurl",
-	license="MIT",
-	keywords="django url urlparse web python regex",
-	packages= find_packages(exclude=['tests']),
-	include_package_data=True,
-	test_suite="tests",
-	long_description= read('README.md'),
-	install_requires=['django'],
-	classifiers=[
-		'Development Status :: 5 - Production/Stable',
+    name="djurl",
+    version=__import__('djurl').get_version(),
+    author="Christopher Ventura",
+    author_email="venturachrisdev@gmail.com",
+    description="Simple yet helpful library for writing Django urls by an easy, short an intuitive way.",
+    url="https://github.com/venturachrisdev/djurl",
+    license="MIT",
+    keywords="django url urlparse web python regex",
+    packages=find_packages(exclude=['tests']),
+    include_package_data=True,
+    test_suite="tests",
+    long_description=read('README.md'),
+    install_requires=['django'],
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Environment :: Plugins',
         'Framework :: Django',
@@ -35,7 +37,7 @@ setup(
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Software Development :: Pre-processors'
-	]
+    ]
 )
 
 print(read('README.md'))

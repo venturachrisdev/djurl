@@ -48,7 +48,8 @@ Now you know what you should use `DjUrl`, It's time to learn how to use it. DjUr
 * `month`: A number between 0, 01,...,12.
 * `year`: A four digits number: `1998, 2017, 2018, 3015, 2020, 1406...`
 * `date`: An expression with `year-month-day` format: `2017-06-23, 1998-10-20, 1492-10-12`
-* `filename`: An expression with `*.\w{2,4}` format: `index.js`, `detail.html`, 'my_book.pdf', 'dfj358h-g9854-fn84n4.tmp'
+* `filename`: An expression with `*.\w{2,4}` format: `index.js`, `detail.html`, `'my_book.pdf'`, `'dfj358h-g9854-fn84n4.tmp'`
+* `UUID`: *Universally unique identifier* is a 128-bit number used to identify information in computer systems. Use a format as `xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx`. Ej: `123e4567-e89b-12d3-a456-426655440000`
 
 That means, wherever you put `/:id` you can use it in your view as param (named `id`).
 ```python

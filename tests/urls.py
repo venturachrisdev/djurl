@@ -258,3 +258,18 @@ class TestRegexBuilding(unittest.TestCase):
 
         self.assertFalse(evaluate('/uuid/:uuid', 'uuid/9j96ghn8g508604'))
         self.assertFalse(evaluate('/:uuid', '499b9c8-3642-47f-848-560c7c413'))
+
+    def test_evaluate_query(self):
+        self.assertTrue(evaluate('/:query', '00990998'))
+        self.assertTrue(evaluate('/:query', 'aaaaaaaaa'))
+        self.assertTrue(evaluate('/:query', '0df43tr-53535t'))
+        self.assertTrue(evaluate('/:query', '859hg897895,/4r0r23449'))
+        self.assertTrue(evaluate('/:query', 'hello%20work'))
+        self.assertTrue(evaluate('/:query', 'hey_dude_whats_app'))
+        self.assertTrue(evaluate('/:query', 'don%27t%20quote%20me&dkfjd2'))
+        self.assertTrue(evaluate('/:query', 'version%20v.2.0'))
+        self.assertTrue(evaluate('/:query', 'don%27t+let+go'))
+
+        self.assertFalse(evaluate('/:query', 'don\'t quote me'))
+        self.assertFalse(evaluate('/:query', 'Not gonna work'))
+        self.assertFalse(evaluate('/:query', 'Maybe?'))

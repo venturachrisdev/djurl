@@ -4,6 +4,9 @@ VERSION = (0, 1, 3)
 def get_version():
     return ".".join(map(str, VERSION))
 
+"""
+TODO: Find out another way to regex 'query' without all that %#$$*#
+"""
 
 _default_patterns_ = {
     # Keys
@@ -19,6 +22,7 @@ _default_patterns_ = {
     'page': r'\d+',
     'filename': r'[\w,\s-]+\.[A-Za-z]{2,4}',
     'uuid': r'([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}){1}',
+    'query': r'(\w|\.|\,|\/|\\|\=|[%!$`&*()+@_-])+',
 }
 
 

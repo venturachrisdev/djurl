@@ -248,3 +248,13 @@ class TestRegexBuilding(unittest.TestCase):
         self.assertFalse(evaluate('/:filename', 'home'))
         self.assertFalse(evaluate('/:filename', 'user/articles'))
         self.assertFalse(evaluate('/:filename', 'chapter/01'))
+
+    def test_evaluate_uuid(self):
+        self.assertTrue(evaluate('/:uuid', 'adcd3063-f29e-4d94-9d41-16dc80f33282'))
+        self.assertTrue(evaluate('/uuid/:uuid', 'uuid/b15f994d-911a-4ee9-8658-2a69c6d9ef39'))
+        self.assertTrue(evaluate('/user/:user_uuid/comments', 'user/499eb9c8-3642-47f3-8482-560c7a20c413/comments'))
+        self.assertTrue(evaluate('/generate/:uuid', 'generate/fc3f6748-5e0e-11e7-907b-a6006ad3dba0'))
+        self.assertTrue(evaluate('/u/:uuid', 'u/f72ec388-5e0f-11e7-907b-a6006ad3dba0'))
+
+        self.assertFalse(evaluate('/uuid/:uuid', 'uuid/9j96ghn8g508604'))
+        self.assertFalse(evaluate('/:uuid', '499b9c8-3642-47f-848-560c7c413'))

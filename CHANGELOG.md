@@ -1,10 +1,11 @@
-v0.2.0 (Develop)
+v0.2.0
 ---
 * removed unnecesary `print()` statement.
 * Added *pep8* recommendations.
-* Added `:filename` regex.
+* Added `:filename` pattern.
 * Added `:uuid` pattern.
 * Added `:query` pattern.
+* Unregisted patterns are of type `:slug` by default.
 
 v0.1.3
 ---

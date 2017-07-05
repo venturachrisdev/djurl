@@ -70,12 +70,14 @@ def myview(request, post_pk, comment_id):
 	# `post_pk` is parsed as a :pk and `comment_id` like an :id
 
 ```
-Yeah, it sounds good!, but... What if I wanted to use my own patterns? - Easy, you can register many patterns as you want:
+Yeah, it sounds good!, but... What if I wanted to use my own patterns? - Easy, any world in the path is of type `:slug` by default, but if you need a custom pattern you can register many as you want:
 ```python
 from djurl import url, register_pattern
 register_pattern('hash', '[a-f0-9]{9}')
-# use it
-url('/:hash', myview)
+# parsed as slug
+url('/:user', myUserView),
+# custom pattern
+url('/:hash', myview),
 ```
 
 If you have questions, visit our [FAQ's](FAQ.md) or open an *issue*.

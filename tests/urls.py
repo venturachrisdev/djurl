@@ -46,7 +46,6 @@ class TestRegexBuilding(unittest.TestCase):
         self.assertEqual(build('^blog/$'), '^blog/$')
         self.assertEqual(build('^me/15/$'), '^me/15/$')
         self.assertEqual(build('^father/', exact=False), '^father/')
-        self.assertEqual(build('comments/:comment'), '^comments/:comment/$')
         self.assertEqual(build('/', exact=False), '^')
         self.assertEqual(build('^*.jpg|png|gif|jpeg$'), '^*.jpg|png|gif|jpeg$')
         self.assertEqual(build('^/', exact=False), '^/')
@@ -59,7 +58,6 @@ class TestRegexBuilding(unittest.TestCase):
         """
         self.assertEqual(build('/about'), '^about/$')
         self.assertEqual(build('/hello/world'), '^hello/world/$')
-        self.assertEqual(build('/articles/:article/comments/:comment', exact=False), '^articles/:article/comments/:comment')
         self.assertEqual(build('/me', exact=False), '^me')
 
     def test_add_slash_at_end_for_exact_routes(self):
@@ -110,6 +108,9 @@ class TestRegexBuilding(unittest.TestCase):
         self.assertEqual(build('/articles/:slug'), '^articles/(?P<slug>[A-Za-z0-9_-]+)/$')
         self.assertEqual(build('/post/:slug/comments'), '^post/(?P<slug>[A-Za-z0-9_-]+)/comments/$')
 
+        # Custom
+        self.assertEqual(build('/articles/:user'), '^articles/(?P<user>[A-Za-z0-9_-]+)/$')
+
     def test_pattern_filename(self):
         self.assertEqual(build('/:filename'), '^(?P<filename>[\w,\s-]+\.[A-Za-z]{2,4})/$')
         self.assertEqual(build('/media/:filename'), '^media/(?P<filename>[\w,\s-]+\.[A-Za-z]{2,4})/$')
@@ -156,12 +157,12 @@ class TestRegexBuilding(unittest.TestCase):
         self.assertTrue(evaluate('/', ''))
         self.assertTrue(evaluate('/hello', 'hello'))
         self.assertTrue(evaluate('/home/', 'home'))
-        self.assertTrue(evaluate('/article/:article', 'article/:article'))
+        self.assertTrue(evaluate('/article/:article', 'article/whatever'))
         self.assertTrue(evaluate('  /users/  ', 'users'))
+        self.assertTrue(evaluate('/blog/:blog', 'blog/hello-world'))
 
         self.assertFalse(evaluate('/blog', 'blogggg'))
-        self.assertFalse(evaluate('/article/:article', 'article/3'))
-        self.assertFalse(evaluate('/blog/:blog', 'blog/hello-world'))
+        self.assertFalse(evaluate('/article/:article', 'article/-5n877$@'))
 
     def test_evaluate_pk(self):
         self.assertTrue(evaluate('/:pk', '10'))

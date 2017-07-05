@@ -61,7 +61,6 @@ class Djurl():
 
     # core
     def build(self):
-
         built = self.trim(self.pattern)
         if len(built) > 1:
             import re
@@ -70,11 +69,20 @@ class Djurl():
                 if key in _default_patterns_:
                     newpattern = self.create_pattern(key, _default_patterns_[key])
                     built = built.replace(":%s" % key, newpattern)
+                    done = True
                 else:
+                    done = False
                     for x in _default_patterns_:
                         if key.endswith('_%s' % x):
                             newpattern = self.create_pattern(key, _default_patterns_[x])
                             built = built.replace(":%s" % key, newpattern)
+                            done = True
+                    # Slug by default
+                    if not done:
+                        newpattern = self.create_pattern(key, _default_patterns_['slug'])
+                        built = built.replace(":%s" % key, newpattern)
+
+
             if not built.endswith('/') and not built.endswith('$'):
                 if self.exact or (not self.exact and self.father):
                     built += '/'
